@@ -3,6 +3,7 @@ import Layout from "../components/Layout";
 import { Table, StatusBadge, Modal, Field, inputClass, PrimaryButton, StatCard } from "../components/ui";
 import { useTable } from "../lib/useTable";
 import { Plus } from "lucide-react";
+import VisaExpenses from "./VisaExpenses";
 
 const STATUS_OPTIONS = ["aberto", "pago", "vencido"];
 const TYPE_OPTIONS = [
@@ -20,7 +21,7 @@ const emptyForm = {
   counterparty: "",
 };
 
-export default function Financials() {
+function AccountsPayableReceivable() {
   const { rows, loading, insertRow, updateRow, deleteRow } = useTable("financial_entries");
   const [open, setOpen] = useState(false);
   const [editing, setEditing] = useState(null);
@@ -60,7 +61,7 @@ export default function Financials() {
   ];
 
   return (
-    <Layout eyebrow="Financeiro" title="Contas a Pagar & Receber">
+    <div>
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-6">
         <StatCard label="Total a receber" value={`USD ${totalReceber.toLocaleString("en-US")}`} accent="gold" />
         <StatCard label="Total a pagar" value={`USD ${totalPagar.toLocaleString("en-US")}`} />
@@ -132,6 +133,37 @@ export default function Financials() {
           </div>
         </form>
       </Modal>
+    </div>
+  );
+}
+
+const TABS = [
+  { key: "contas", label: "Contas a Pagar & Receber" },
+  { key: "visto", label: "Despesas VISTO" },
+];
+
+export default function Financials() {
+  const [tab, setTab] = useState("contas");
+
+  return (
+    <Layout eyebrow="Financeiro" title="Financeiro">
+      <div className="flex gap-1 mb-6 border-b border-navy-100">
+        {TABS.map((t) => (
+          <button
+            key={t.key}
+            onClick={() => setTab(t.key)}
+            className={`px-4 py-2.5 text-sm font-medium border-b-2 transition-colors ${
+              tab === t.key
+                ? "border-gold-500 text-navy-800"
+                : "border-transparent text-navy-400 hover:text-navy-600"
+            }`}
+          >
+            {t.label}
+          </button>
+        ))}
+      </div>
+
+      {tab === "contas" ? <AccountsPayableReceivable /> : <VisaExpenses />}
     </Layout>
   );
 }
