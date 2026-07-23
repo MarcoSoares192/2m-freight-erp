@@ -6,9 +6,7 @@ import {
   Wallet,
   Users,
   FolderClosed,
-  LogOut,
 } from "lucide-react";
-import { useAuth } from "../lib/AuthContext";
 
 const links = [
   { to: "/", label: "Painel", icon: LayoutDashboard, end: true },
@@ -20,8 +18,6 @@ const links = [
 ];
 
 export default function Sidebar() {
-  const { signOut } = useAuth();
-
   return (
     <aside className="w-64 shrink-0 bg-navy-800 text-white flex flex-col h-screen sticky top-0">
       <div className="px-5 pt-6 pb-4">
@@ -48,16 +44,6 @@ export default function Sidebar() {
           </NavLink>
         ))}
       </nav>
-
-      <div className="px-3 py-4 border-t border-navy-600">
-        <button
-          onClick={signOut}
-          className="flex w-full items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium text-navy-200 hover:bg-navy-700 hover:text-white transition-colors"
-        >
-          <LogOut size={18} />
-          Sair
-        </button>
-      </div>
     </aside>
   );
 }
