@@ -1,6 +1,7 @@
 import { NavLink } from "react-router-dom";
 import {
   LayoutDashboard,
+  FileStack,
   Ship,
   FileSpreadsheet,
   Wallet,
@@ -10,6 +11,7 @@ import {
 
 const links = [
   { to: "/", label: "Painel", icon: LayoutDashboard, end: true },
+  { to: "/processos", label: "Processos", icon: FileStack },
   { to: "/embarques", label: "Embarques & Containers", icon: Ship },
   { to: "/cotacoes", label: "Cotações de Frete", icon: FileSpreadsheet },
   { to: "/financeiro", label: "Financeiro", icon: Wallet },

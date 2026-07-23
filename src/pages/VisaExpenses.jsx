@@ -5,6 +5,7 @@ import { Plus } from "lucide-react";
 
 const emptyForm = {
   expense_type: "",
+  supplier: "",
   amount: "",
   currency: "USD",
   expense_date: "",
@@ -46,6 +47,7 @@ export default function VisaExpenses() {
 
   const columns = [
     { key: "expense_type", header: "Tipo de despesa" },
+    { key: "supplier", header: "Fornecedor", render: (r) => r.supplier || "—" },
     { key: "amount", header: "Valor", render: (r) => `${r.currency} ${Number(r.amount).toLocaleString("en-US")}` },
     { key: "expense_date", header: "Data" },
     {
@@ -92,6 +94,11 @@ export default function VisaExpenses() {
             <input required className={inputClass} placeholder="Ex: Taxa consular, tradução juramentada, passagem…"
               value={form.expense_type}
               onChange={(e) => setForm({ ...form, expense_type: e.target.value })} />
+          </Field>
+          <Field label="Fornecedor">
+            <input className={inputClass} placeholder="Ex: Consulado dos EUA, VFS Global, cartório…"
+              value={form.supplier || ""}
+              onChange={(e) => setForm({ ...form, supplier: e.target.value })} />
           </Field>
           <div className="grid grid-cols-3 gap-3">
             <Field label="Valor">
