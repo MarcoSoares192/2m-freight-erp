@@ -1,0 +1,55 @@
+@import url('https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700;800&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+* { box-sizing: border-box; }
+
+html, body, #root { height: 100%; }
+
+body {
+  margin: 0;
+  background: #F4F6F9;
+  color: #0d2440;
+  font-family: 'Inter', sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+h1, h2, h3, .font-display { font-family: 'Sora', sans-serif; }
+.font-mono, .tracking-code { font-family: 'IBM Plex Mono', monospace; }
+
+/* Signature element: manifest strip — a dashed routing line with waypoint dots,
+   echoing the globe-grid + arrow motif in the 2M mark. Used on headers. */
+.manifest-strip {
+  position: relative;
+  height: 2px;
+  background: repeating-linear-gradient(
+    to right,
+    #F26F21 0px,
+    #F26F21 6px,
+    transparent 6px,
+    transparent 12px
+  );
+}
+.manifest-strip::before,
+.manifest-strip::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  width: 6px;
+  height: 6px;
+  border-radius: 999px;
+  background: #F26F21;
+  transform: translateY(-50%);
+}
+.manifest-strip::before { left: 0; }
+.manifest-strip::after { right: 0; }
+
+::-webkit-scrollbar { width: 8px; height: 8px; }
+::-webkit-scrollbar-thumb { background: #aec1d9; border-radius: 999px; }
+::-webkit-scrollbar-track { background: transparent; }
+
+@media (prefers-reduced-motion: reduce) {
+  * { animation-duration: 0.001ms !important; transition-duration: 0.001ms !important; }
+}
